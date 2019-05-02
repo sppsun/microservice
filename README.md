@@ -4,7 +4,7 @@ Some microservice apps based on spring cloud, jwt etc.
 
 ## Getting Started
 
-Some microservice apps based on spring cloud, jwt etc. We provided a demo for react native app development.<br/>
+Some microservice apps based on spring cloud, jwt etc. We provided a demo for microservice development.<br/>
 
 ### Prerequisites
 
