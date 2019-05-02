@@ -1,0 +1,47 @@
+spring:
+  profiles:
+    active: prd
+---
+spring:
+  profiles: dev
+  application:
+    name: eureka
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    user:
+      name: test
+      password: test
+  cloud:
+    config:
+      server:
+        bootstrap: true
+      enabled: false
+server:
+  port: 9001
+eureka.client.register-with-eureka: false
+eureka.client.fetch-registry: false
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:${server.port}/eureka/
+logging.config: classpath:log4j2-dev.yml
+---
+spring:
+  profiles: prd
+  application:
+    name: eureka
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    user:
+      name: test
+      password: test
+  cloud:
+    config:
+      server:
+        bootstrap: true
+      enabled: false
+server:
+  port: 9001
+eureka.client.register-with-eureka: false
+eureka.client.fetch-registry: false
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:${server.port}/eureka/
+logging.config: classpath:log4j2-prd.yml

@@ -1,0 +1,78 @@
+spring:
+  profiles:
+    active: prd
+---
+spring:
+  profiles: dev
+  application:
+    name: zuul
+  cloud:
+    config:
+      uri: http://127.0.0.1:9002
+      fail-fast: true
+  security:
+    user:
+      name: test
+      password: test
+server:
+  port: 9003
+eureka:
+  instance:
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      user.name: test         #These two are needed so that the server
+      user.password: test
+      startup: ${random.int}    #needed to trigger info and endpoint update after restart
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://127.0.0.1:9001}/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+logging.config: classpath:log4j2-dev.yml
+---
+spring:
+  profiles: prd
+  application:
+    name: zuul
+  cloud:
+    config:
+      uri: http://127.0.0.1:9002
+      fail-fast: true
+  security:
+    user:
+      name: test
+      password: test
+server:
+  port: 9003
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      user.name: test         #These two are needed so that the server
+      user.password: test
+      startup: ${random.int}    #needed to trigger info and endpoint update after restart
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://127.0.0.1:9001}/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+logging.config: classpath:log4j2-prd.yml
